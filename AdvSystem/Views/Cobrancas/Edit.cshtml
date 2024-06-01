@@ -1,0 +1,75 @@
+﻿@model AdvSystem.Models.Cobranca
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Cobranca</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="ClienteId" class="control-label"></label>
+                <input asp-for="ClienteId" class="form-control" />
+                <span asp-validation-for="ClienteId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProcessoId" class="control-label"></label>
+                <input asp-for="ProcessoId" class="form-control" />
+                <span asp-validation-for="ProcessoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Valor" class="control-label"></label>
+                <input asp-for="Valor" class="form-control" />
+                <span asp-validation-for="Valor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="JurosPrazo" class="control-label"></label>
+                <input asp-for="JurosPrazo" class="form-control" />
+                <span asp-validation-for="JurosPrazo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="JurosAtraso" class="control-label"></label>
+                <input asp-for="JurosAtraso" class="form-control" />
+                <span asp-validation-for="JurosAtraso" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Data" class="control-label"></label>
+                <input asp-for="Data" class="form-control" />
+                <span asp-validation-for="Data" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Parcela" class="control-label"></label>
+                <input asp-for="Parcela" class="form-control" />
+                <span asp-validation-for="Parcela" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Pago" /> @Html.DisplayNameFor(model => model.Pago)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="ValorAtualizado" class="control-label"></label>
+                <input asp-for="ValorAtualizado" class="form-control" />
+                <span asp-validation-for="ValorAtualizado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

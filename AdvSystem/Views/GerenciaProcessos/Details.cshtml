@@ -1,0 +1,67 @@
+﻿@model AdvSystem.Models.GerenciaProcesso
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>GerenciaProcesso</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NumeroProcesso)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NumeroProcesso)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Apensos)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Apensos)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.pgDecisao)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.pgDecisao)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.pgAcordao)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.pgAcordao)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.pgSentenca)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.pgSentenca)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.pgDiligencias)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.pgDiligencias)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.pgRecursos)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.pgRecursos)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ClienteId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ClienteId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
