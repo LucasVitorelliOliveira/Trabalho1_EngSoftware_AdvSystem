@@ -1,16 +1,16 @@
 ﻿@model IEnumerable<AdvSystem.Models.Agenda>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Agenda";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h3>Agenda</h3>
+<div>
+    <a asp-action="Create" class="btn-floating btn-medium waves-effect waves-light grey darken-3"><i class="material-icons left">format_list_bulleted_add</i></a>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<table class="centered responsive-table">
     <thead>
         <tr>
             <th>
@@ -32,11 +32,11 @@
                 @Html.DisplayFor(modelItem => item.Descricao)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a class="btn-floating btn-medium waves-effect light-blue" asp-action="Edit" asp-route-id="@item.Id"><i class="material-icons">edit_note</i></a>
+                    <a class="btn-floating btn-medium waves-effect yellow darken-2" asp-action="Details" asp-route-id="@item.Id"><i class="material-icons">info</i></a>
+                    <a class="btn-floating btn-medium waves-effect red darken-1" asp-action="Delete" asp-route-id="@item.Id"><i class="material-icons">delete</i></a>
             </td>
         </tr>
 }
     </tbody>
-</table>
+</tabl>
