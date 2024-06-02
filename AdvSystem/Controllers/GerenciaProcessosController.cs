@@ -54,7 +54,7 @@ namespace AdvSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NumeroProcesso,Apensos,pgDecisao,pgAcordao,pgSentenca,pgDiligencias,pgRecursos,ClienteId")] GerenciaProcesso gerenciaProcesso)
+        public async Task<IActionResult> Create([Bind("Id,NumeroProcesso,Descricao,Movimentacoes,ClienteId")] GerenciaProcesso gerenciaProcesso)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace AdvSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,NumeroProcesso,Apensos,pgDecisao,pgAcordao,pgSentenca,pgDiligencias,pgRecursos,ClienteId")] GerenciaProcesso gerenciaProcesso)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,NumeroProcesso,Descricao,Movimentacoes,ClienteId")] GerenciaProcesso gerenciaProcesso)
         {
             if (id != gerenciaProcesso.Id)
             {

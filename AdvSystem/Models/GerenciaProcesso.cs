@@ -10,14 +10,12 @@ namespace AdvSystem.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required(ErrorMessage = "Campo Obrigatório!")]
+        [Display(Name = "Número do Processo")]
         public string NumeroProcesso { get; set; } = string.Empty;
-
-        public string Apensos { get; set; } = string.Empty;
-        public List<int> pgDecisao { get; set; } = new List<int>();
-        public List<int> pgAcordao { get; set; } = new List<int>();
-        public List<int> pgSentenca { get; set; } = new List<int>();
-        public List<int> pgDiligencias { get; set; } = new List<int>();
-        public List<int> pgRecursos { get; set; } = new List<int>();
+        [Display(Name = "Descrição")]
+        public string? Descricao{ get; set; }
+        [Display(Name = "Movimentações")]
+        public string? Movimentacoes { get; set; }
 
         //FK
         [Display(Name = "Parte")]

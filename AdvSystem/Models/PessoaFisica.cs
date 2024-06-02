@@ -32,14 +32,14 @@ namespace AdvSystem.Models
         [MaxLength(11, ErrorMessage = "Limite máximo de caracteres excedido!")]
         [MinLength(8, ErrorMessage = "O campo deve conter no mínimo 8 caracteres!")]
         [Display(Name = "Telefone")]
-        public string Telefone { get; set; } = string.Empty;
+        public string? Telefone { get; set; } = string.Empty;
         [Required(ErrorMessage = "Campo Obrigatório!")]
         [MaxLength(13, ErrorMessage = "Limite máximo de caracteres excedido!")]
         [MinLength(9, ErrorMessage = "O campo deve conter no mínimo 9 caracteres!")]
         [Display(Name = "Celular")]
-        public string Celular { get; set; } = string.Empty;
+        public string? Celular { get; set; } = string.Empty;
         [MaxLength(100, ErrorMessage = "Limite máximo de caracteres excedido!")]
-        public string Email { get; set; } = string.Empty;
+        public string? Email { get; set; } = string.Empty;
 
         //Endereço
         [Required(ErrorMessage = "Campo Obrigatório!")]

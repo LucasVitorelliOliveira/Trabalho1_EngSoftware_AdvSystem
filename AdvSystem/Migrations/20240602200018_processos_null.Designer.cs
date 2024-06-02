@@ -4,6 +4,7 @@ using AdvSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AdvSystem.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20240602200018_processos_null")]
+    partial class processos_null
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -122,17 +125,29 @@ namespace AdvSystem.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Apensos")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("ClienteId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Descricao")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Movimentacoes")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("NumeroProcesso")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("pgAcordao")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("pgDecisao")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("pgDiligencias")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("pgRecursos")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("pgSentenca")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -170,6 +185,7 @@ namespace AdvSystem.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -196,6 +212,7 @@ namespace AdvSystem.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Telefone")
+                        .IsRequired()
                         .HasMaxLength(11)
                         .HasColumnType("nvarchar(11)");
 

@@ -25,7 +25,6 @@ namespace AdvSystem.Models
         public DateTime Data { get; set; }
         public float Parcela { get; set; }
         public bool Pago { get; set; }
-
         public float ValorAtualizado { get; set; }
     }
 }
