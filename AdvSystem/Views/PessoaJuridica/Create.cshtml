@@ -1,76 +1,83 @@
 ﻿@model AdvSystem.Models.PessoaJuridica
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Pessoa Juridica";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
+<h3>Cadastrar Nova Empresa</h3>
 
-<h4>PessoaJuridica</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
+    <form asp-action="Create" class="col s12">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+        <div class="row">
+            <div class="input-field col s6">
                 <label asp-for="RazaoSocial" class="control-label"></label>
                 <input asp-for="RazaoSocial" class="form-control" />
                 <span asp-validation-for="RazaoSocial" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="input-field col s6">
                 <label asp-for="NomeFantasia" class="control-label"></label>
                 <input asp-for="NomeFantasia" class="form-control" />
                 <span asp-validation-for="NomeFantasia" class="text-danger"></span>
             </div>
-            <div class="form-group">
+        </div>
+        <div class="row">
+            <div class="input-field col s4">
                 <label asp-for="Cnpj" class="control-label"></label>
                 <input asp-for="Cnpj" class="form-control" />
                 <span asp-validation-for="Cnpj" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="input-field col s4">
                 <label asp-for="InscricaoEstadual" class="control-label"></label>
                 <input asp-for="InscricaoEstadual" class="form-control" />
                 <span asp-validation-for="InscricaoEstadual" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="input-field col s4">
+                <select asp-for="RepresentanteLegalId" asp-items="ViewBag.RepresentanteLegalId">
+                    <option value="">Selecionar</option>
+                </select>
+                <label>Representante Legal</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
                 <label asp-for="Uf" class="control-label"></label>
                 <input asp-for="Uf" class="form-control" />
                 <span asp-validation-for="Uf" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="input-field col s6">
                 <label asp-for="Cidade" class="control-label"></label>
                 <input asp-for="Cidade" class="form-control" />
                 <span asp-validation-for="Cidade" class="text-danger"></span>
             </div>
-            <div class="form-group">
+        </div>
+        <div class="row">
+            <div class="input-field col s4">
                 <label asp-for="Rua" class="control-label"></label>
                 <input asp-for="Rua" class="form-control" />
                 <span asp-validation-for="Rua" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="input-field col s4">
                 <label asp-for="Numero" class="control-label"></label>
                 <input asp-for="Numero" class="form-control" />
                 <span asp-validation-for="Numero" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="input-field col s4">
                 <label asp-for="Bairro" class="control-label"></label>
                 <input asp-for="Bairro" class="form-control" />
                 <span asp-validation-for="Bairro" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="RepresentanteLegalId" class="control-label"></label>
-                <select asp-for="RepresentanteLegalId" class ="form-control" asp-items="ViewBag.RepresentanteLegalId"></select>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <button type="submit" class="waves-effect btn light-blue"><i class="material-icons left">add_circle</i>Cadastrar</button>
+                <a asp-action="Index" class="waves-effect btn-flat"><i class="material-icons left">arrow_back</i>Voltar</a>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
+        </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

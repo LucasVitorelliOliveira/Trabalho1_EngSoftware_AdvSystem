@@ -1,14 +1,13 @@
 ﻿@model AdvSystem.Models.EntradaCaixa
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Entrada de Caixa";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<h3>Detalhes</h3>
 
 <div>
-    <h4>EntradaCaixa</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -49,7 +48,9 @@
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class="row">
+    <div class="input-field col s12">
+        <a class="waves-effect btn light-blue" asp-action="Edit" asp-route-id="@Model?.Id"><i class="small material-icons left">edit_note</i>Editar</a>
+        <a asp-action="Index" class="waves-effect btn-flat"><i class="material-icons left">arrow_back</i>Voltar</a>
+    </div>
 </div>

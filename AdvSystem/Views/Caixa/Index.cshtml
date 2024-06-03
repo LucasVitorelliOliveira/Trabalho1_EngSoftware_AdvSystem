@@ -2,8 +2,41 @@
     ViewData["Title"] = "Cliente";
 }
 
-<div class="text-center">
-    <a class="light-blue-text" asp-area="" asp-controller="EntradaCaixa" asp-action="Index"><i class="material-icons">calendar_month</i>Entrada de Caixa</a>
-    <a class="light-blue-text" asp-area="" asp-controller="SaidaCaixa" asp-action="Index"><i class="material-icons">calendar_month</i>Saída de Caixa</a>
-    <a class="light-blue-text" asp-area="" asp-controller="Cobrancas" asp-action="Index"><i class="material-icons">calendar_month</i>Em Abertos</a>
+<div class="row">
+    <div class="col s4 m7">
+        <a asp-area="" asp-controller="EntradaCaixa" asp-action="Index">
+            <div class="card text-center">
+                <div class="card-image">
+                    <i class="large material-icons">attach_money</i>
+                </div>
+                <div class="card-content">
+                    <span class="card-title">Entrada</span>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col s4 m7">
+        <a asp-area="" asp-controller="SaidaCaixa" asp-action="Index">
+            <div class="card text-center">
+                <div class="card-image">
+                    <i class="large material-symbols-outlined">mintmark</i>
+                </div>
+                <div class="card-content">
+                    <span class="card-title">Saída</span>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col s4 m7">
+        <a asp-area="" asp-controller="Cobrancas" asp-action="Index">
+            <div class="card text-center">
+                <div class="card-image">
+                    <i class="large material-icons">receipt_long</i>
+                </div>
+                <div class="card-content">
+                    <span class="card-title">Em Aberto</span>
+                </div>
+            </div>
+        </a>
+    </div>
 </div>

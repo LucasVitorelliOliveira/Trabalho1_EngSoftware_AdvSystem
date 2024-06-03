@@ -2,7 +2,30 @@
     ViewData["Title"] = "Cliente";
 }
 
-<div class="text-center">
-    <a class="light-blue-text" asp-area="" asp-controller="PessoaFisica" asp-action="Index"><i class="material-icons">calendar_month</i>Pessoa Física</a>
-    <a class="light-blue-text" asp-area="" asp-controller="PessoaJuridica" asp-action="Index"><i class="material-icons">calendar_month</i>Pessoa Jurídica</a>
+
+<div class="row">
+    <div class="col s6 m7">
+        <a asp-area="" asp-controller="PessoaFisica" asp-action="Index">
+            <div class="card text-center">
+                <div class="card-image">
+                    <i class="large material-icons">group</i>
+                </div>
+                <div class="card-content">
+                    <span class="card-title">Pessoa Física</span>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col s6 m7">
+        <a asp-area="" asp-controller="PessoaJuridica" asp-action="Index">
+            <div class="card text-center">
+                <div class="card-image">
+                    <i class="large material-icons">corporate_fare</i>
+                </div>
+                <div class="card-content">
+                    <span class="card-title">Pessoa Jurídica</span>
+                </div>
+            </div>
+        </a>
+    </div>
 </div>

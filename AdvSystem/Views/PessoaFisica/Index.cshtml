@@ -1,15 +1,15 @@
 ﻿@model IEnumerable<AdvSystem.Models.PessoaFisica>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Pessoa Fisica";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h3>Clientes</h3>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div>
+    <a asp-action="Create" class="btn-floating btn-medium waves-effect waves-light grey darken-3"><i class="material-icons left">format_list_bulleted_add</i></a>
+</div>
 <table class="table">
     <thead>
         <tr>
@@ -20,89 +20,35 @@
                 @Html.DisplayNameFor(model => model.Sobrenome)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Rg)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Cpf)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataNascimento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Telefone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Celular)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Uf)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cidade)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rua)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Numero)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Bairro)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sobrenome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rg)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cpf)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataNascimento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Telefone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Celular)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Uf)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cidade)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rua)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Numero)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Bairro)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sobrenome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cpf)
+                </td>
+                <td>
+                    <a class="btn-floating btn-medium waves-effect light-blue" asp-action="Edit" asp-route-id="@item.Id"><i class="material-icons">edit_note</i></a>
+                    <a class="btn-floating btn-medium waves-effect yellow darken-2" asp-action="Details" asp-route-id="@item.Id"><i class="material-icons">info</i></a>
+                    <a class="btn-floating btn-medium waves-effect red darken-1" asp-action="Delete" asp-route-id="@item.Id"><i class="material-icons">delete</i></a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+<div class="row">
+    <div class="input-field col s12">
+        <a href="../Cliente" class="waves-effect btn-flat"><i class="material-icons left">arrow_back</i>Voltar</a>
+    </div>
+</div>

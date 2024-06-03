@@ -1,73 +1,80 @@
 ﻿@model AdvSystem.Models.Cobranca
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Em Aberto";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
+<h3>Editar</h3>
 
-<h4>Cobranca</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
+    <form asp-action="Edit" class="col s12">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="input-field col s4">
                 <label asp-for="ClienteId" class="control-label"></label>
                 <input asp-for="ClienteId" class="form-control" />
                 <span asp-validation-for="ClienteId" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="input-field col s4">
                 <label asp-for="ProcessoId" class="control-label"></label>
                 <input asp-for="ProcessoId" class="form-control" />
                 <span asp-validation-for="ProcessoId" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="input-field col s4">
                 <label asp-for="Valor" class="control-label"></label>
                 <input asp-for="Valor" class="form-control" />
                 <span asp-validation-for="Valor" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="JurosPrazo" class="control-label"></label>
-                <input asp-for="JurosPrazo" class="form-control" />
-                <span asp-validation-for="JurosPrazo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="JurosAtraso" class="control-label"></label>
-                <input asp-for="JurosAtraso" class="form-control" />
-                <span asp-validation-for="JurosAtraso" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Data" class="control-label"></label>
-                <input asp-for="Data" class="form-control" />
-                <span asp-validation-for="Data" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+        </div>
+        <div class="row">
+            <div class="input-field col s4">
                 <label asp-for="Parcela" class="control-label"></label>
                 <input asp-for="Parcela" class="form-control" />
                 <span asp-validation-for="Parcela" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Pago" /> @Html.DisplayNameFor(model => model.Pago)
-                </label>
+            <div class="input-field col s4">
+                <label asp-for="JurosPrazo" class="control-label"></label>
+                <input asp-for="JurosPrazo" class="form-control" />
+                <span asp-validation-for="JurosPrazo" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="input-field col s4">
+                <label asp-for="JurosAtraso" class="control-label"></label>
+                <input asp-for="JurosAtraso" class="form-control" />
+                <span asp-validation-for="JurosAtraso" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
                 <label asp-for="ValorAtualizado" class="control-label"></label>
                 <input asp-for="ValorAtualizado" class="form-control" />
                 <span asp-validation-for="ValorAtualizado" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            <div class="input-field col s6">
+                <label asp-for="Data"></label>
+                <input asp-for="Data" type="text" class="datepicker" />
+                <span asp-validation-for="Data" class="text-danger"></span>
             </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <p>
+                    <label>
+                        <input type="checkbox" asp-for="Pago" />
+                        <span>Pago</span>
+                    </label>
+                </p>
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <button type="submit" class="waves-effect btn light-blue"><i class="material-icons left">save</i>Salvar</button>
+                <a asp-action="Index" class="waves-effect btn-flat"><i class="material-icons left">arrow_back</i>Voltar</a>
+            </div>
+        </div>
+    </form>
 </div>
 
 @section Scripts {
