@@ -18,13 +18,12 @@ namespace AdvSystem.Models
 
         [Display(Name = "Juros da Parcela")]
         public float JurosPrazo { get; set; }
-        [Display(Name = "Juros de Atraso")]
-        public float JurosAtraso { get; set; }
         [DataType(DataType.Date)]
-        [Display(Name = "Data da Transação")]
+        [Display(Name = "Data Prazo")]
         public DateTime Data { get; set; }
         public float Parcela { get; set; }
         public bool Pago { get; set; }
-        public float ValorAtualizado { get; set; }
+        [Display(Name = "Valor Atualizado")]
+        public float? ValorAtualizado { get; set; }
     }
 }

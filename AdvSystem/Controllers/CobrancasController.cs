@@ -54,10 +54,12 @@ namespace AdvSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ClienteId,ProcessoId,Valor,JurosPrazo,JurosAtraso,Data,Parcela,Pago,ValorAtualizado")] Cobranca cobranca)
+        public async Task<IActionResult> Create([Bind("Id,ClienteId,ProcessoId,Valor,JurosPrazo,Data,Parcela,Pago,ValorAtualizado")] Cobranca cobranca)
         {
             if (ModelState.IsValid)
             {
+                Parcela(cobranca);
+                JurosPrazo(cobranca);
                 _context.Add(cobranca);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -86,7 +88,7 @@ namespace AdvSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ClienteId,ProcessoId,Valor,JurosPrazo,JurosAtraso,Data,Parcela,Pago,ValorAtualizado")] Cobranca cobranca)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ClienteId,ProcessoId,Valor,JurosPrazo,Data,Parcela,Pago,ValorAtualizado")] Cobranca cobranca)
         {
             if (id != cobranca.Id)
             {
@@ -97,6 +99,8 @@ namespace AdvSystem.Controllers
             {
                 try
                 {
+                    Parcela(cobranca);
+                    JurosPrazo(cobranca);
                     _context.Update(cobranca);
                     await _context.SaveChangesAsync();
                 }
@@ -152,6 +156,15 @@ namespace AdvSystem.Controllers
         private bool CobrancaExists(int id)
         {
             return _context.Cobrancas.Any(e => e.Id == id);
+        }
+
+        public void JurosPrazo([Bind("Id,ClienteId,ProcessoId,Valor,JurosPrazo,Data,Parcela,Pago,ValorAtualizado")] Cobranca cobranca)
+        {
+            cobranca.ValorAtualizado += cobranca.ValorAtualizado * (cobranca.JurosPrazo / 100);
+        }
+        public void Parcela([Bind("Id,ClienteId,ProcessoId,Valor,JurosPrazo,Data,Parcela,Pago,ValorAtualizado")] Cobranca cobranca)
+        {
+            cobranca.ValorAtualizado = cobranca.Valor / cobranca.Parcela;
         }
     }
 }

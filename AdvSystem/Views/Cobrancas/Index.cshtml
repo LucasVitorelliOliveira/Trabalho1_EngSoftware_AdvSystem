@@ -20,10 +20,13 @@
                 @Html.DisplayNameFor(model => model.ProcessoId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Valor)
+                @Html.DisplayNameFor(model => model.ValorAtualizado)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Data)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pago)
             </th>
             <th></th>
         </tr>
@@ -39,10 +42,20 @@
                     @Html.DisplayFor(modelItem => item.ProcessoId)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Valor)
+                    @Html.DisplayFor(modelItem => item.ValorAtualizado)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Data)
+                </td>
+                <td>
+                    @if(item.Pago == true)
+                    {
+                        <div>Sim</div>
+                    }
+                    else
+                    {
+                        <div>Não</div>
+                    }
                 </td>
                 <td>
                     <a class="btn-floating btn-medium waves-effect light-blue" asp-action="Edit" asp-route-id="@item.Id"><i class="material-icons">edit_note</i></a>
