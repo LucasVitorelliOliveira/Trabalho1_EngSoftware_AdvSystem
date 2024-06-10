@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AdvSystem.Data;
 using AdvSystem.Models;
+using Xceed.Words.NET;
+using System.IO;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 
 namespace AdvSystem.Controllers
 {
@@ -146,6 +150,46 @@ namespace AdvSystem.Controllers
             }
 
             await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Relatorio()
+        {
+            List<EntradaCaixa> listaClientes = await _context.EntradasCaixa.ToListAsync();
+
+            Document doc = new Document(PageSize.A4);
+            doc.SetMargins(40, 40, 40, 40);
+            string caminho = @"C:\pdf\" + "relatorio.pdf";
+
+            PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream(caminho, FileMode.Create));
+
+            doc.Open();
+
+            Paragraph titulo = new Paragraph();
+            titulo.Font = new Font(Font.FontFamily.HELVETICA, 40);
+            titulo.Alignment = Element.ALIGN_CENTER;
+            titulo.Add("RELATÓRIO\n\n");
+            doc.Add(titulo);
+
+            Paragraph paragrafo = new Paragraph("", new Font(Font.FontFamily.HELVETICA, 12));
+            string conteudo = "Relatório de entrada de valores do escritório\n\n";
+            paragrafo.Alignment = Element.ALIGN_CENTER;
+            paragrafo.Add(conteudo);
+            doc.Add(paragrafo);
+
+            PdfPTable table = new PdfPTable(3);
+            foreach(var item in listaClientes)
+            {
+                table.AddCell(
+                    "Cliente: " + item.ClienteId +
+                    "\nValor: " + item.Valor +
+                    "\nDescrição: " + item.Descricao
+                    );
+            }
+            doc.Add(table);
+
+            doc.Close();
+
             return RedirectToAction(nameof(Index));
         }
 

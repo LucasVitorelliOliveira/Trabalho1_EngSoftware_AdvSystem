@@ -44,7 +44,7 @@ namespace AdvSystem.Controllers
         }
 
         // GET: GerenciaProcessos/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create(int? id)
         {
             return View();
         }
@@ -54,7 +54,7 @@ namespace AdvSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NumeroProcesso,Descricao,Movimentacoes,ClienteId")] GerenciaProcesso gerenciaProcesso)
+        public async Task<IActionResult> Create([Bind("Id,NumeroProcesso,Descricao,Movimentacoes,ClienteId")] GerenciaProcesso gerenciaProcesso, int? id)
         {
             if (ModelState.IsValid)
             {

@@ -25,6 +25,7 @@
                     <li><a class="light-blue-text" asp-area="" asp-controller="GerenciaProcessos" asp-action="Index"><i class="material-symbols-outlined">clinical_notes</i>Processos</a></li>
                     <li><a class="light-blue-text" asp-area="" asp-controller="Agenda" asp-action="Index"><i class="material-icons">calendar_month</i>Agenda</a></li>
                     <li><a class="light-blue-text" asp-area="" asp-controller="ConversorDocumento" asp-action="Index"><i class="material-icons">photo_library</i>Conversor</a></li>
+                    <li><a class="light-blue-text" asp-area="" asp-controller="GeradorPecas" asp-action="Index"><i class="material-icons">post_add</i>Gerador</a></li>
                 </ul>
                 <ul class="right hide-on-med-and-down">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index"><i class="material-icons">home</i></a></li>
@@ -59,6 +60,7 @@
                     monthsShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
                     weekdaysShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab']
                 },
+                yearRange: [1900,2050],
             });
         });
 
