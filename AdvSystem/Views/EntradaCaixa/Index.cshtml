@@ -8,19 +8,19 @@
 <h3>Caixa - Entradas</h3>
 
 <div>
-    <a asp-action="Create" class="btn-floating btn-medium waves-effect waves-light grey darken-3"><i class="material-icons left">format_list_bulleted_add</i></a>
+    <a asp-action="EscolherPessoa" class="btn-floating btn-medium waves-effect waves-light grey darken-3"><i class="material-icons left">format_list_bulleted_add</i></a>
 </div>
 <table class="table">
     <thead>
         <tr>
             <th>
+                Cliente
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Valor)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Data)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ClienteId)
             </th>
             <th></th>
         </tr>
@@ -30,16 +30,24 @@
         {
             <tr>
                 <td>
+                    @Html.DisplayFor(modelItem => item.PessoaFisica.Nome)
+                    @Html.DisplayFor(modelItem => item.PessoaJuridica.RazaoSocial)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Valor)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Data)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ClienteId)
-                </td>
-                <td>
-                    <a class="btn-floating btn-medium waves-effect light-blue" asp-action="Edit" asp-route-id="@item.Id"><i class="material-icons">edit_note</i></a>
+                    @if (item.ClienteId != null)
+                    {
+                        <a class="btn-floating btn-medium waves-effect light-blue" asp-action="Edit" asp-route-id="@item.Id"><i class="material-icons">edit_note</i></a>
+                    }
+                    else
+                    {
+                        <a class="btn-floating btn-medium waves-effect light-blue" asp-action="EditPJ" asp-route-id="@item.Id"><i class="material-icons">edit_note</i></a>
+                    }
                     <a class="btn-floating btn-medium waves-effect yellow darken-2" asp-action="Details" asp-route-id="@item.Id"><i class="material-icons">info</i></a>
                     <a class="btn-floating btn-medium waves-effect red darken-1" asp-action="Delete" asp-route-id="@item.Id"><i class="material-icons">delete</i></a>
                 </td>

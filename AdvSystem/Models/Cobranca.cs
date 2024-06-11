@@ -9,10 +9,6 @@ namespace AdvSystem.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [Display(Name = "Cliente")]
-        public int ClienteId { get; set; }
-        [Display(Name = "Processo")]
-        public int ProcessoId { get; set; }
         [Required(ErrorMessage = "Campo Obrigatório!")]
         public float Valor { get; set; }
 
@@ -25,5 +21,10 @@ namespace AdvSystem.Models
         public bool Pago { get; set; }
         [Display(Name = "Valor Atualizado")]
         public float? ValorAtualizado { get; set; }
+
+        //Fk
+        public int ProcessoId { get; set; }
+        [ForeignKey("ProcessoId")]
+        public GerenciaProcesso Processos { get; set; }
     }
 }

@@ -1,19 +1,19 @@
-﻿@model AdvSystem.Models.SaidaCaixa
+﻿@model AdvSystem.Models.EntradaCaixa
 
 @{
-    ViewData["Title"] = "Saída de Caixa";
+    ViewData["Title"] = "Entrada de Caixa";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h3>Cadastrar Nova Saída</h3>
+<h3>Cadastrar Nova Entrada</h3>
 
 <hr />
 <div class="row">
-    <form asp-action="Create" class="col s12">
+    <form asp-action="CreatePJ" class="col s12">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="row">
             <div class="input-field col s6">
-                <select asp-for="ClienteId" asp-items="ViewBag.ClienteId">
+                <select asp-for="ClienteJId" asp-items="ViewBag.ClienteJId">
                     <option value="">Selecionar</option>
                 </select>
                 <label>Cliente</label>
@@ -31,7 +31,7 @@
                     <option value="3">Crédito</option>
                     <option value="4">Cheque</option>
                 </select>
-                <label>Método de Pagamento</label>
+                <label>Metodo de Pagamento</label>
                 <span asp-validation-for="MetodoPagamento" class="text-danger"></span>
             </div>
         </div>
@@ -53,17 +53,7 @@
                 <input asp-for="UsuarioId" class="form-control" />
                 <span asp-validation-for="UsuarioId" class="text-danger"></span>
             </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <p>
-                    <label>
-                        <input type="checkbox" asp-for="Sangria" />
-                        <span>Sangria</span>
-                    </label>
-                </p>
-            </div>
-        </div>
+        </div>  
         <div class="row">
             <div class="input-field col s12">
                 <button type="submit" class="waves-effect btn light-blue"><i class="material-icons left">add_circle</i>Cadastrar</button>

@@ -11,6 +11,13 @@
 <div>
     <hr />
     <dl class="row">
+        <dt class="col-sm-2">
+            Cliente
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PessoaFisica.Nome)
+            @Html.DisplayFor(model => model.PessoaJuridica.RazaoSocial)
+        </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Valor)
         </dt>
@@ -47,12 +54,6 @@
             {
                 <div>Não</div>
             }
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ClienteId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ClienteId)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.UsuarioId)

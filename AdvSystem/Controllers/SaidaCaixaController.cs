@@ -22,7 +22,13 @@ namespace AdvSystem.Controllers
         // GET: SaidaCaixa
         public async Task<IActionResult> Index()
         {
-            return View(await _context.SaidasCaixa.ToListAsync());
+            var context = _context.SaidasCaixa.Include(s => s.PessoaFisica).Include(s => s.PessoaJuridica);
+            return View(await context.ToListAsync());
+        }
+
+        public IActionResult EscolherPessoa()
+        {
+            return View();
         }
 
         // GET: SaidaCaixa/Details/5
@@ -34,6 +40,8 @@ namespace AdvSystem.Controllers
             }
 
             var saidaCaixa = await _context.SaidasCaixa
+                .Include(s => s.PessoaFisica)
+                .Include(s => s.PessoaJuridica)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (saidaCaixa == null)
             {
@@ -46,6 +54,7 @@ namespace AdvSystem.Controllers
         // GET: SaidaCaixa/Create
         public IActionResult Create()
         {
+            ViewData["ClienteId"] = new SelectList(_context.PessoasFisicas, "Id", "Nome");
             return View();
         }
 
@@ -54,7 +63,7 @@ namespace AdvSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Valor,MetodoPagamento,Descricao,Data,Sangria,ClienteId,UsuarioId")] SaidaCaixa saidaCaixa)
+        public async Task<IActionResult> Create([Bind("Id,Valor,MetodoPagamento,Descricao,Data,Sangria,ClienteId,ClienteJId,UsuarioId")] SaidaCaixa saidaCaixa)
         {
             if (ModelState.IsValid)
             {
@@ -62,8 +71,32 @@ namespace AdvSystem.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["ClienteId"] = new SelectList(_context.PessoasFisicas, "Id", "Nome", saidaCaixa.ClienteId);
             return View(saidaCaixa);
         }
+        public IActionResult CreatePJ()
+        {
+            ViewData["ClienteJId"] = new SelectList(_context.PessoasJuridicas, "Id", "RazaoSocial");
+            return View();
+        }
+
+        // POST: SaidaCaixa/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreatePJ([Bind("Id,Valor,MetodoPagamento,Descricao,Data,Sangria,ClienteId,ClienteJId,UsuarioId")] SaidaCaixa saidaCaixa)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(saidaCaixa);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["ClienteJId"] = new SelectList(_context.PessoasJuridicas, "Id", "RazaoSocial", saidaCaixa.ClienteId);
+            return View(saidaCaixa);
+        }
+
 
         // GET: SaidaCaixa/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -78,6 +111,7 @@ namespace AdvSystem.Controllers
             {
                 return NotFound();
             }
+            ViewData["ClienteId"] = new SelectList(_context.PessoasFisicas, "Id", "Nome", saidaCaixa.ClienteId);
             return View(saidaCaixa);
         }
 
@@ -86,7 +120,7 @@ namespace AdvSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Valor,MetodoPagamento,Descricao,Data,Sangria,ClienteId,UsuarioId")] SaidaCaixa saidaCaixa)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Valor,MetodoPagamento,Descricao,Data,Sangria,ClienteId,ClienteJId,UsuarioId")] SaidaCaixa saidaCaixa)
         {
             if (id != saidaCaixa.Id)
             {
@@ -113,6 +147,59 @@ namespace AdvSystem.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["ClienteId"] = new SelectList(_context.PessoasFisicas, "Id", "Nome", saidaCaixa.ClienteId);
+            return View(saidaCaixa);
+        }
+        // GET: SaidaCaixa/Edit/5
+        public async Task<IActionResult> EditPJ(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var saidaCaixa = await _context.SaidasCaixa.FindAsync(id);
+            if (saidaCaixa == null)
+            {
+                return NotFound();
+            }
+            ViewData["ClienteJId"] = new SelectList(_context.PessoasJuridicas, "Id", "RazaoSocial", saidaCaixa.ClienteId);
+            return View(saidaCaixa);
+        }
+
+        // POST: SaidaCaixa/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditPJ(int id, [Bind("Id,Valor,MetodoPagamento,Descricao,Data,Sangria,ClienteId,ClienteJId,UsuarioId")] SaidaCaixa saidaCaixa)
+        {
+            if (id != saidaCaixa.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(saidaCaixa);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!SaidaCaixaExists(saidaCaixa.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["ClienteJId"] = new SelectList(_context.PessoasJuridicas, "Id", "RazaoSocial", saidaCaixa.ClienteId);
             return View(saidaCaixa);
         }
 
@@ -125,6 +212,8 @@ namespace AdvSystem.Controllers
             }
 
             var saidaCaixa = await _context.SaidasCaixa
+                .Include(s => s.PessoaFisica)
+                .Include(s => s.PessoaJuridica)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (saidaCaixa == null)
             {

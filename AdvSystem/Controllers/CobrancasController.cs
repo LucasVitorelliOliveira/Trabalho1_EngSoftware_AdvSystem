@@ -22,7 +22,8 @@ namespace AdvSystem.Controllers
         // GET: Cobrancas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Cobrancas.ToListAsync());
+            var context = _context.Cobrancas.Include(c => c.Processos);
+            return View(await context.ToListAsync());
         }
 
         // GET: Cobrancas/Details/5
@@ -34,6 +35,7 @@ namespace AdvSystem.Controllers
             }
 
             var cobranca = await _context.Cobrancas
+                .Include(c => c.Processos)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (cobranca == null)
             {
@@ -46,6 +48,7 @@ namespace AdvSystem.Controllers
         // GET: Cobrancas/Create
         public IActionResult Create()
         {
+            ViewData["ProcessoId"] = new SelectList(_context.GereciamentoProcessos, "Id", "NumeroProcesso");
             return View();
         }
 
@@ -54,16 +57,15 @@ namespace AdvSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ClienteId,ProcessoId,Valor,JurosPrazo,Data,Parcela,Pago,ValorAtualizado")] Cobranca cobranca)
+        public async Task<IActionResult> Create([Bind("Id,Valor,JurosPrazo,Data,Parcela,Pago,ValorAtualizado,ProcessoId")] Cobranca cobranca)
         {
-            if (ModelState.IsValid)
-            {
-                Parcela(cobranca);
-                JurosPrazo(cobranca);
-                _context.Add(cobranca);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
+            Parcelas(cobranca);
+            Juros(cobranca);
+            _context.Add(cobranca);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+
+            ViewData["ProcessoId"] = new SelectList(_context.GereciamentoProcessos, "Id", "NumeroProcesso", cobranca.ProcessoId);
             return View(cobranca);
         }
 
@@ -80,6 +82,7 @@ namespace AdvSystem.Controllers
             {
                 return NotFound();
             }
+            ViewData["ProcessoId"] = new SelectList(_context.GereciamentoProcessos, "Id", "NumeroProcesso", cobranca.ProcessoId);
             return View(cobranca);
         }
 
@@ -88,35 +91,34 @@ namespace AdvSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ClienteId,ProcessoId,Valor,JurosPrazo,Data,Parcela,Pago,ValorAtualizado")] Cobranca cobranca)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Valor,JurosPrazo,Data,Parcela,Pago,ValorAtualizado,ProcessoId")] Cobranca cobranca)
         {
             if (id != cobranca.Id)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            try
             {
-                try
-                {
-                    Parcela(cobranca);
-                    JurosPrazo(cobranca);
-                    _context.Update(cobranca);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CobrancaExists(cobranca.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                Parcelas(cobranca);
+                Juros(cobranca);
+                _context.Update(cobranca);
+                await _context.SaveChangesAsync();
             }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CobrancaExists(cobranca.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Index));
+
+            ViewData["ProcessoId"] = new SelectList(_context.GereciamentoProcessos, "Id", "NumeroProcesso", cobranca.ProcessoId);
             return View(cobranca);
         }
 
@@ -129,6 +131,7 @@ namespace AdvSystem.Controllers
             }
 
             var cobranca = await _context.Cobrancas
+                .Include(c => c.Processos)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (cobranca == null)
             {
@@ -153,18 +156,34 @@ namespace AdvSystem.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public void Parcelas(Cobranca cobranca)
+        {
+            if(cobranca.Parcela >= 1)
+            {
+                cobranca.ValorAtualizado = cobranca.Valor / cobranca.Parcela;
+            }
+            else
+            {
+                cobranca.ValorAtualizado = cobranca.Valor;
+            }
+            
+        }
+
+        public void Juros(Cobranca cobranca)
+        {
+            if (cobranca.JurosPrazo >= 1)
+            {
+                cobranca.ValorAtualizado += (cobranca.Valor * (cobranca.JurosPrazo / 100));
+            }
+            else
+            {
+                cobranca.ValorAtualizado = cobranca.Valor;
+            }
+        }
+
         private bool CobrancaExists(int id)
         {
             return _context.Cobrancas.Any(e => e.Id == id);
-        }
-
-        public void JurosPrazo([Bind("Id,ClienteId,ProcessoId,Valor,JurosPrazo,Data,Parcela,Pago,ValorAtualizado")] Cobranca cobranca)
-        {
-            cobranca.ValorAtualizado += cobranca.ValorAtualizado * (cobranca.JurosPrazo / 100);
-        }
-        public void Parcela([Bind("Id,ClienteId,ProcessoId,Valor,JurosPrazo,Data,Parcela,Pago,ValorAtualizado")] Cobranca cobranca)
-        {
-            cobranca.ValorAtualizado = cobranca.Valor / cobranca.Parcela;
         }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using AdvSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AdvSystem.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20240611024433_aa")]
+    partial class aa
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,6 +46,12 @@ namespace AdvSystem.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int?>("ClienteId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ClienteJId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("Data")
                         .HasColumnType("datetime(6)");
 
@@ -66,7 +75,9 @@ namespace AdvSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProcessoId");
+                    b.HasIndex("ClienteId");
+
+                    b.HasIndex("ClienteJId");
 
                     b.ToTable("Cobrancas");
                 });
@@ -130,11 +141,14 @@ namespace AdvSystem.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int?>("PessoaFisicaId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("ClienteId");
-
                     b.HasIndex("ClienteJId");
+
+                    b.HasIndex("PessoaFisicaId");
 
                     b.ToTable("Controle_de_Processos");
                 });
@@ -301,13 +315,17 @@ namespace AdvSystem.Migrations
 
             modelBuilder.Entity("AdvSystem.Models.Cobranca", b =>
                 {
-                    b.HasOne("AdvSystem.Models.GerenciaProcesso", "Processos")
+                    b.HasOne("AdvSystem.Models.PessoaFisica", "PessoaFisica")
                         .WithMany()
-                        .HasForeignKey("ProcessoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ClienteId");
 
-                    b.Navigation("Processos");
+                    b.HasOne("AdvSystem.Models.PessoaJuridica", "PessoaJuridica")
+                        .WithMany()
+                        .HasForeignKey("ClienteJId");
+
+                    b.Navigation("PessoaFisica");
+
+                    b.Navigation("PessoaJuridica");
                 });
 
             modelBuilder.Entity("AdvSystem.Models.EntradaCaixa", b =>
@@ -327,13 +345,13 @@ namespace AdvSystem.Migrations
 
             modelBuilder.Entity("AdvSystem.Models.GerenciaProcesso", b =>
                 {
-                    b.HasOne("AdvSystem.Models.PessoaFisica", "PessoaFisica")
-                        .WithMany()
-                        .HasForeignKey("ClienteId");
-
                     b.HasOne("AdvSystem.Models.PessoaJuridica", "PessoaJuridica")
                         .WithMany()
                         .HasForeignKey("ClienteJId");
+
+                    b.HasOne("AdvSystem.Models.PessoaFisica", "PessoaFisica")
+                        .WithMany()
+                        .HasForeignKey("PessoaFisicaId");
 
                     b.Navigation("PessoaFisica");
 

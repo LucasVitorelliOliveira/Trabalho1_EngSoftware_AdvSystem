@@ -5,11 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h3>Adicionar Novo Processo</h3>
+<h3>Editar Processo</h3>
 
 <hr />
 <div class="row">
-    <form asp-action="Create" class="col s12">
+    <form asp-action="EditPJ" class="col s12">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="row">
             <div class="input-field col s6">
@@ -18,7 +18,7 @@
                 <span asp-validation-for="NumeroProcesso" class="text-danger"></span>
             </div>
             <div class="input-field col s6">
-                <select asp-for="ClienteId" asp-items="ViewBag.ClienteId">
+                <select asp-for="ClienteJId" asp-items="ViewBag.ClienteJId">
                     <option value="">Selecionar</option>
                 </select>
                 <label>Cliente</label>
@@ -40,7 +40,7 @@
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <button type="submit" class="waves-effect btn light-blue"><i class="material-icons left">add_circle</i>Criar</button>
+                <button type="submit" class="waves-effect btn light-blue"><i class="material-icons left">save</i>Salvar</button>
                 <a asp-action="Index" class="waves-effect btn-flat"><i class="material-icons left">arrow_back</i>Voltar</a>
             </div>
         </div>
@@ -48,7 +48,5 @@
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

@@ -21,9 +21,15 @@ namespace AdvSystem.Models
         [DataType(DataType.Date)]
         [Display(Name = "Data da Transação")]
         public DateTime Data { get; set; }
-        [Display(Name = "Cliente")]
-        public int ClienteId { get; set; }
-        [Display(Name = "Usuário")]
-        public int UsusarioId { get; set; }
+
+        //Fk
+        public int? ClienteId { get; set; }
+        public int? ClienteJId { get; set; }
+        [ForeignKey("ClienteId")]
+        public PessoaFisica? PessoaFisica { get; set; }
+        [ForeignKey("ClienteJId")]
+        public PessoaJuridica? PessoaJuridica { get; set; }
+
+        public int? UsuarioId { get; set; }
     }
 }

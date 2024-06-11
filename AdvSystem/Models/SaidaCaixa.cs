@@ -24,9 +24,14 @@ namespace AdvSystem.Models
         [Required(ErrorMessage = "Campo Obrigatório!")]
         public bool Sangria { get; set; }
 
-        [Display(Name = "Cliente")]
-        public int ClienteId { get; set; }
-        [Display(Name = "Usuário")]
-        public int UsuarioId { get; set; }
+        //Fk
+        public int? ClienteId { get; set; }
+        public int? ClienteJId { get; set; }
+        [ForeignKey("ClienteId")]
+        public PessoaFisica? PessoaFisica { get; set; }
+        [ForeignKey("ClienteJId")]
+        public PessoaJuridica? PessoaJuridica { get; set; }
+
+        public int? UsuarioId { get; set; }
     }
 }

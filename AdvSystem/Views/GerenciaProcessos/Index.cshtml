@@ -8,7 +8,7 @@
 <h3>Processos</h3>
 
 <div>
-    <a asp-action="Create" class="btn-floating btn-medium waves-effect waves-light grey darken-3"><i class="material-symbols-outlined left">shadow_add</i></a>
+    <a asp-action="EscolherPessoa" class="btn-floating btn-medium waves-effect waves-light grey darken-3"><i class="material-symbols-outlined left">shadow_add</i></a>
 </div>
 <table class="centered responsive-table">
     <thead>
@@ -17,7 +17,7 @@
                 @Html.DisplayNameFor(model => model.NumeroProcesso)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ClienteId)
+                Cliente
             </th>
             <th></th>
         </tr>
@@ -30,10 +30,18 @@
                     @Html.DisplayFor(modelItem => item.NumeroProcesso)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ClienteId)
+                    @Html.DisplayFor(modelItem => item.PessoaFisica.Nome)
+                    @Html.DisplayFor(modelItem => item.PessoaJuridica.RazaoSocial)
                 </td>
                 <td>
-                    <a class="btn-floating btn-medium waves-effect light-blue" asp-action="Edit" asp-route-id="@item.Id"><i class="material-icons">edit_note</i></a>
+                    @if(item.ClienteId != null)
+                    {
+                        <a class="btn-floating btn-medium waves-effect light-blue" asp-action="Edit" asp-route-id="@item.Id"><i class="material-icons">edit_note</i></a>
+                    }
+                    else
+                    {
+                        <a class="btn-floating btn-medium waves-effect light-blue" asp-action="EditPJ" asp-route-id="@item.Id"><i class="material-icons">edit_note</i></a>
+                    }
                     <a class="btn-floating btn-medium waves-effect yellow darken-2" asp-action="Details" asp-route-id="@item.Id"><i class="material-icons">info</i></a>
                     <a class="btn-floating btn-medium waves-effect red darken-1" asp-action="Delete" asp-route-id="@item.Id"><i class="material-icons">delete</i></a>
                 </td>

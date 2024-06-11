@@ -17,8 +17,12 @@ namespace AdvSystem.Models
         [Display(Name = "Movimentações")]
         public string? Movimentacoes { get; set; }
 
-        //FK
-        [Display(Name = "Parte")]
-        public int ClienteId { get; set; }
+        //Fk
+        public int? ClienteId { get; set; }
+        public int? ClienteJId { get; set; }
+        [ForeignKey("ClienteId")]
+        public PessoaFisica? PessoaFisica { get; set; }
+        [ForeignKey("ClienteJId")]
+        public PessoaJuridica? PessoaJuridica { get; set; }
     }
 }

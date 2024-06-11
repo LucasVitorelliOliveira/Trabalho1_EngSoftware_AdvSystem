@@ -14,10 +14,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ClienteId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProcessoId)
+                Número de Processo
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ValorAtualizado)
@@ -36,10 +33,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ClienteId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProcessoId)
+                    @Html.DisplayFor(modelItem => item.Processos.NumeroProcesso)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.ValorAtualizado)
