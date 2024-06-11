@@ -7,9 +7,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AdvSystem.Data;
 using AdvSystem.Models;
+using AdvSystem.Filters;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 
 namespace AdvSystem.Controllers
 {
+    [AdvLogado]
     public class EntradaCaixaController : Controller
     {
         private readonly Context _context;
@@ -63,7 +67,7 @@ namespace AdvSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Valor,MetodoPagamento,Descricao,Data,ClienteId,ClienteJId,UsusarioId")] EntradaCaixa entradaCaixa)
+        public async Task<IActionResult> Create([Bind("Id,Valor,MetodoPagamento,Descricao,Data,ClienteId,ClienteJId")] EntradaCaixa entradaCaixa)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +89,7 @@ namespace AdvSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreatePJ([Bind("Id,Valor,MetodoPagamento,Descricao,Data,ClienteId,ClienteJId,UsusarioId")] EntradaCaixa entradaCaixa)
+        public async Task<IActionResult> CreatePJ([Bind("Id,Valor,MetodoPagamento,Descricao,Data,ClienteId,ClienteJId")] EntradaCaixa entradaCaixa)
         {
             if (ModelState.IsValid)
             {
@@ -119,7 +123,7 @@ namespace AdvSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Valor,MetodoPagamento,Descricao,Data,ClienteId,ClienteJId,UsusarioId")] EntradaCaixa entradaCaixa)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Valor,MetodoPagamento,Descricao,Data,ClienteId,ClienteJId")] EntradaCaixa entradaCaixa)
         {
             if (id != entradaCaixa.Id)
             {
@@ -171,7 +175,7 @@ namespace AdvSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditPJ(int id, [Bind("Id,Valor,MetodoPagamento,Descricao,Data,ClienteId,ClienteJId,UsusarioId")] EntradaCaixa entradaCaixa)
+        public async Task<IActionResult> EditPJ(int id, [Bind("Id,Valor,MetodoPagamento,Descricao,Data,ClienteId,ClienteJId")] EntradaCaixa entradaCaixa)
         {
             if (id != entradaCaixa.Id)
             {
@@ -234,6 +238,69 @@ namespace AdvSystem.Controllers
             }
 
             await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Relatorio()
+        {
+            var context = _context.EntradasCaixa.Include(e => e.PessoaFisica).Include(e => e.PessoaJuridica);
+            List<EntradaCaixa> entrada = await context.ToListAsync();
+
+            int total = 0;
+
+            Document doc = new Document(PageSize.A4);
+            doc.SetMargins(40, 40, 40, 40);
+            string caminho = @"C:\pdf\" + "relatorio.pdf";
+
+            PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream(caminho, FileMode.Create));
+
+            doc.Open();
+
+            Paragraph titulo = new Paragraph();
+            titulo.Font = new Font(Font.FontFamily.HELVETICA, 40);
+            titulo.Alignment = Element.ALIGN_CENTER;
+            titulo.Add("RELATÓRIO\n\n");
+            doc.Add(titulo);
+
+            Paragraph par = new Paragraph("", new Font(Font.FontFamily.HELVETICA, 12));
+            par.Alignment = Element.ALIGN_CENTER;
+            string cont = "Relatório de entrada de valores do escritorio\n\n" + "Total de Clientes: " + entrada.Count + "\n\n";
+            par.Add(cont);
+            doc.Add(par);
+
+            PdfPTable table = new PdfPTable(1);
+            foreach (var i in entrada)
+            {
+                if (i.ClienteId != null)
+                {
+                    table.AddCell(
+                    "Cliente: " + i.PessoaFisica.Nome +
+                    "\nValor: " + i.Valor +
+                    "\nMétodo de Pagamento: " + i.MetodoPagamento +
+                    "\nData: " + i.Data.ToLongDateString() +
+                    "\nDescrição: " + i.Descricao);
+                }
+                else
+                {
+                    table.AddCell(
+                    "Cliente: " + i.PessoaJuridica.RazaoSocial +
+                    "\nValor: " + i.Valor +
+                    "\nMétodo de Pagamento: " + i.MetodoPagamento +
+                    "\nData: " + i.Data.ToLongDateString() +
+                    "\nDescrição: " + i.Descricao);
+                }
+                total += i.Valor;
+            }
+            doc.Add(table);
+
+            Paragraph val = new Paragraph("", new Font(Font.FontFamily.HELVETICA, 12));
+            string contv = "Valores Totais: R$" + total + "\n\n";
+            val.Alignment = Element.ALIGN_CENTER;
+            val.Add(contv);
+            doc.Add(val);
+
+            doc.Close();
+
             return RedirectToAction(nameof(Index));
         }
 

@@ -31,7 +31,5 @@ namespace AdvSystem.Models
         public PessoaFisica? PessoaFisica { get; set; }
         [ForeignKey("ClienteJId")]
         public PessoaJuridica? PessoaJuridica { get; set; }
-
-        public int? UsuarioId { get; set; }
     }
 }

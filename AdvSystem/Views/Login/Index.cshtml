@@ -1,0 +1,56 @@
+﻿@model AdvSystem.Models.LoginModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_LayoutDeslogado.cshtml";
+}
+
+<h3>Login</h3>
+
+@if(TempData["MenssagemErro"] != null)
+{
+    <div class="alert row">
+        <div class="col s12 m6">
+            <div class="card grey">
+                <div class="card-content white-text">
+                    <span class="card-title">@TempData["MenssagemErro"]</span>
+                </div>
+                <div class="card-action">
+                    <a class="btn-floating btn-medium waves-effect waves-light red" data-bs-dismiss="alert" aria-label="Close"><i class="material-icons">close</i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<hr />
+<div class="row">
+    <form asp-action="Entrar" method="post" class="col s12">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="input-field col s6">
+                <label asp-for="Login" class="control-label">Login</label>
+                <input asp-for="Login" type="text" class="form-control" />
+                <span asp-validation-for="Login" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <label asp-for="Senha" class="control-label">Senha</label>
+                <input asp-for="Senha" type="password" class="form-control" />
+                <span asp-validation-for="Senha" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <button type="submit" class="waves-effect btn light-blue"><i class="material-icons left">login</i>Entrar</button>
+                @* <a asp-action="Index" class="waves-effect btn-flat"><i class="material-icons left">arrow_back</i>Voltar</a> *@
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

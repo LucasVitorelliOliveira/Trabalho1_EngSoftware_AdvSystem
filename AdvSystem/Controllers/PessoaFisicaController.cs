@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AdvSystem.Data;
 using AdvSystem.Models;
+using AdvSystem.Filters;
 
 namespace AdvSystem.Controllers
 {
+    [UsuarioLogado]
     public class PessoaFisicaController : Controller
     {
         private readonly Context _context;
@@ -65,6 +67,7 @@ namespace AdvSystem.Controllers
             return View(pessoaFisica);
         }
 
+        [EstAdvLogado]
         // GET: PessoaFisica/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -84,6 +87,7 @@ namespace AdvSystem.Controllers
         // POST: PessoaFisica/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [EstAdvLogado]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Sobrenome,Rg,Cpf,DataNascimento,Telefone,Celular,Email,Uf,Cidade,Rua,Numero,Bairro")] PessoaFisica pessoaFisica)
@@ -116,6 +120,7 @@ namespace AdvSystem.Controllers
             return View(pessoaFisica);
         }
 
+        [EstAdvLogado]
         // GET: PessoaFisica/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -134,6 +139,7 @@ namespace AdvSystem.Controllers
             return View(pessoaFisica);
         }
 
+        [EstAdvLogado]
         // POST: PessoaFisica/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

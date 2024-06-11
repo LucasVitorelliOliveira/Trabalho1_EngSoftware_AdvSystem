@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AdvSystem.Data;
 using AdvSystem.Models;
+using AdvSystem.Filters;
 
 namespace AdvSystem.Controllers
 {
+    [UsuarioLogado]
     public class AgendaController : Controller
     {
         private readonly Context _context;

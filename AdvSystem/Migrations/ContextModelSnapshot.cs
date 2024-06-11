@@ -93,9 +93,6 @@ namespace AdvSystem.Migrations
                     b.Property<int>("MetodoPagamento")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UsuarioId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Valor")
                         .HasColumnType("int");
 
@@ -284,9 +281,6 @@ namespace AdvSystem.Migrations
                     b.Property<bool>("Sangria")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<int?>("UsuarioId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Valor")
                         .HasColumnType("int");
 
@@ -297,6 +291,42 @@ namespace AdvSystem.Migrations
                     b.HasIndex("ClienteJId");
 
                     b.ToTable("Saida_de_Caixa");
+                });
+
+            modelBuilder.Entity("AdvSystem.Models.Usuario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DataAtualizacao")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("DataCadastro")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Login")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("Perfil")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Senha")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Usuario");
                 });
 
             modelBuilder.Entity("AdvSystem.Models.Cobranca", b =>

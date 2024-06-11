@@ -1,4 +1,5 @@
-﻿using LovePdf.Core;
+﻿using AdvSystem.Filters;
+using LovePdf.Core;
 using LovePdf.Model.Enums;
 using LovePdf.Model.Task;
 using LovePdf.Model.TaskParams;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AdvSystem.Controllers
 {
+    [UsuarioLogado]
     public class ConversorDocumentoController : Controller
     {
         private readonly IWebHostEnvironment _webHostEnvironment;

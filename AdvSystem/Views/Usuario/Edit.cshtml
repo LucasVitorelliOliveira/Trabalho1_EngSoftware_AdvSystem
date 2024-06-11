@@ -1,0 +1,60 @@
+﻿@model AdvSystem.Models.Usuario
+
+@{
+    ViewData["Title"] = "Em Aberto";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Editar</h3>
+
+<hr />
+<div class="row">
+    <form asp-action="Edit" class="col s12">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="input-field col s6">
+                <label asp-for="Nome" class="control-label"></label>
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            <div class="input-field col s6">
+                <label asp-for="Login" class="control-label"></label>
+                <input asp-for="Login" class="form-control" />
+                <span asp-validation-for="Login" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="input-field col s6">
+                <label asp-for="Senha"></label>
+                <input asp-for="Senha" type="password" class="form-control" />
+                <span asp-validation-for="Senha" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <select asp-for="Perfil" asp-items="ViewBag.Perfil">
+                    <option value="">Selecionar</option>
+                    <option value="1">Advogado</option>
+                    <option value="2">Estagiário</option>
+                    <option value="3">Secretário</option>
+                </select>
+                <label>Tipo de Perfil</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <button type="submit" class="waves-effect btn light-blue"><i class="material-icons left">save</i>Salvar</button>
+                <a asp-action="Index" class="waves-effect btn-flat"><i class="material-icons left">arrow_back</i>Voltar</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

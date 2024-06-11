@@ -1,9 +1,11 @@
+using AdvSystem.Filters;
 using AdvSystem.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace AdvSystem.Controllers
 {
+    [SecAdvLogado]
     public class CaixaController : Controller
     {
         private readonly ILogger<CaixaController> _logger;

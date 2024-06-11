@@ -14,5 +14,6 @@ namespace AdvSystem.Data
         public DbSet<EntradaCaixa> EntradasCaixa { get; set; }
         public DbSet<Cobranca> Cobrancas { get; set; }
         public DbSet<Agenda> Agendas { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
     }
 }

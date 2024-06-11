@@ -1,9 +1,11 @@
+using AdvSystem.Filters;
 using AdvSystem.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace AdvSystem.Controllers
 {
+    [UsuarioLogado]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

@@ -1,6 +1,7 @@
 ﻿@model AdvSystem.Models.PessoaFisica
 @{
     ViewData["Title"] = "Gerador de Peças";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
@@ -13,15 +14,63 @@
     </thead>
     <tbody>
         <tr>
-            <td>Procuração</td>
+            <td>Procuração Simples</td>
             <td>
                 <a class="btn-floating btn-medium waves-effect light-blue" asp-action="ProcuracaoPessoaFisica" asp-route-id="@Model.Id"><i class="material-icons left">check_circle</i>Pessoa Física</a>
             </td>
         </tr>
         <tr>
-            <td>Recibo</td>
+            <td>Recibo Simples</td>
             <td>
                 <a class="btn-floating btn-medium waves-effect light-blue" asp-action="ReciboPessoaFisica" asp-route-id="@Model.Id"><i class="material-icons left">check_circle</i>Pessoa Física</a>
+            </td>
+        </tr>
+        <tr>
+            <td>Ação de Execução de Contrato</td>
+            <td>
+                <a class="btn-floating btn-medium waves-effect light-blue" asp-action="AECPF" asp-route-id="@Model.Id"><i class="material-icons left">check_circle</i>Pessoa Física</a>
+            </td>
+        </tr>
+        <tr>
+            <td>Contrato Simples</td>
+            <td>
+                <a class="btn-floating btn-medium waves-effect light-blue" asp-action="CSPF" asp-route-id="@Model.Id"><i class="material-icons left">check_circle</i>Pessoa Física</a>
+            </td>
+        </tr>
+        <tr>
+            <td>Contrato P/ Previdência</td>
+            <td>
+                <a class="btn-floating btn-medium waves-effect light-blue" asp-action="CPP" asp-route-id="@Model.Id"><i class="material-icons left">check_circle</i>Pessoa Física</a>
+            </td>
+        </tr>
+        <tr>
+            <td>Pedido de Habilitação</td>
+            <td>
+                <a class="btn-floating btn-medium waves-effect light-blue" asp-action="HA" asp-route-id="@Model.Id"><i class="material-icons left">check_circle</i>Pessoa Física</a>
+            </td>
+        </tr>
+        <tr>
+            <td>Juntade de Substabelecimento</td>
+            <td>
+                <a class="btn-floating btn-medium waves-effect light-blue" asp-action="JS" asp-route-id="@Model.Id"><i class="material-icons left">check_circle</i>Pessoa Física</a>
+            </td>
+        </tr>
+        <tr>
+            <td>Procuração de Cunho Criminal</td>
+            <td>
+                <a class="btn-floating btn-medium waves-effect light-blue" asp-action="PCC" asp-route-id="@Model.Id"><i class="material-icons left">check_circle</i>Pessoa Física</a>
+            </td>
+        </tr>
+        <tr>
+            <td>Recibo P/ Prestação de Serviços Autônomos</td>
+            <td>
+                <a class="btn-floating btn-medium waves-effect light-blue" asp-action="RSA" asp-route-id="@Model.Id"><i class="material-icons left">check_circle</i>Pessoa Física</a>
+            </td>
+        </tr>
+        <tr>
+            <td>Pedido de Renúncia</td>
+            <td>
+                <a class="btn-floating btn-medium waves-effect light-blue" asp-action="PR" asp-route-id="@Model.Id"><i class="material-icons left">check_circle</i>Pessoa Física</a>
             </td>
         </tr>
     </tbody>
