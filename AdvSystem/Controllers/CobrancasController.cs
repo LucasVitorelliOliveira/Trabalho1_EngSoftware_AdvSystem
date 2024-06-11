@@ -198,7 +198,25 @@ namespace AdvSystem.Controllers
 
             Document doc = new Document(PageSize.A4);
             doc.SetMargins(40, 40, 40, 40);
-            string caminho = @"C:\pdf\" + "relatorio.pdf";
+            string caminho = @"C:\pdf\" + "relatorioCobrancas.pdf";
+            if (System.IO.File.Exists(caminho))
+            {
+                int i = 1;
+                while (true)
+                {
+                    caminho = @"C:\pdf\" + "relatorioCobrancas-" + i.ToString() + ".pdf";
+                    if (!System.IO.File.Exists(caminho))
+                    {
+                        caminho = @"C:\pdf\" + "relatorioCobrancas-" + i.ToString() + ".pdf";
+                        break;
+                    }
+                    i++;
+                }
+            }
+            else
+            {
+                caminho = @"C:\pdf\" + "relatorioCobrancas.pdf";
+            }
 
             PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream(caminho, FileMode.Create));
 
